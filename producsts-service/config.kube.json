@@ -1,0 +1,3 @@
+{
+  "connectionString": "postgresql://roach:Q7gc8rEdS@cockroachdb-public:26257/productsdb"
+}

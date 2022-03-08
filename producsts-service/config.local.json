@@ -1,0 +1,3 @@
+{
+  "connectionString": "postgresql://roach:Q7gc8rEdS@localhost:26257/productsdb"
+}
