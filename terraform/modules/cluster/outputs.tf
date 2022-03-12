@@ -17,3 +17,10 @@ output "client_key" {
 output "host" {
   value = azurerm_kubernetes_cluster.aks-demo.kube_config.0.host
 }
+
+resource "local_file" "kubeconfig" {
+  depends_on = [azurerm_kubernetes_cluster.aks-demo]
+  filename   = "kubeconfig"
+  content    = azurerm_kubernetes_cluster.aks-demo.kube_config_raw
+}
+

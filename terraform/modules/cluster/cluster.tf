@@ -36,27 +36,10 @@ resource "azurerm_kubernetes_cluster" "aks-demo" {
   }
 
   addon_profile {
-    aci_connector_linux {
-      enabled = false
-    }
-
-    azure_policy {
-      enabled = false
-    }
-
     http_application_routing {
       enabled = true
     }
-
-    kube_dashboard {
-      enabled = false
-    }
-
-    oms_agent {
-      enabled = false
-    }
   }
-
 }
 
 /*

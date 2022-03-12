@@ -7,7 +7,7 @@ provider "kubernetes" {
 }
 
 locals {
-  products_service_port = 8080
+  products_service_port = 80
   products_service_name = "products-servic"
 }
 
@@ -21,8 +21,8 @@ resource "kubernetes_ingress" "products_api_gateway" {
     }
 
     annotations = {
-      "kubernetes.io/ingress.class"                = "nginx"
-      "nginx.ingress.kubernetes.io/ssl-redirect"   = "false"
+      "kubernetes.io/ingress.class"              = "addon-http-application-routing"
+      "nginx.ingress.kubernetes.io/ssl-redirect" = "false"
       #"cert-manager.io/cluster-issuer"             = "letsencrypt-staging"
       "nginx.ingress.kubernetes.io/rewrite-target" = "/$2"
       "nginx.ingress.kubernetes.io/use-regex"      = "true"
@@ -31,8 +31,6 @@ resource "kubernetes_ingress" "products_api_gateway" {
 
   spec {
     rule {
-      host = "aks-demo-341b2aa2.hcp.westeurope.azmk8s.io"
-
       http {
         path {
           path = "/api(/|$)(.*)"
@@ -44,8 +42,6 @@ resource "kubernetes_ingress" "products_api_gateway" {
       }
     }
   }
-
-  wait_for_load_balancer = true
 }
 
 resource "kubernetes_deployment" "products_deployment" {

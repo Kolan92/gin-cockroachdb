@@ -17,9 +17,9 @@
 #   value = module.cluster.client_key
 # }
 
-# output "host" {
-#   value = module.cluster.host
-# }
+output "host" {
+  value = module.cluster.host
+}
 
 # k8s
 output "load_balancer_hostname" {
