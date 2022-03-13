@@ -30,3 +30,13 @@ output "load_balancer_ip" {
   value = module.k8s.load_balancer_ip
 }
 
+#cockroachdb
+
+# ``
+
+# output "cockroachdb" {
+#   sensitive = true
+#   value = module.cockroachdb.cockroachdb
+# }
+
+

@@ -32,7 +32,7 @@ func (s *Server) RegisterRouter(router *gin.Engine) {
 func (s *Server) registerCustomerEndpoints(router *gin.Engine) {
 	customer := router.Group("/customer")
 
-	customer.GET("", func(c *gin.Context) {
+	customer.GET("/", func(c *gin.Context) {
 		var customers []models.Customer
 		if err := s.db.Find(&customers).Error; err != nil {
 			c.JSON(errToStatusCode(err), gin.H{"error": err.Error()})
@@ -40,7 +40,7 @@ func (s *Server) registerCustomerEndpoints(router *gin.Engine) {
 			c.JSON(http.StatusOK, customers)
 		}
 	})
-	customer.POST("", func(c *gin.Context) {
+	customer.POST("/", func(c *gin.Context) {
 
 		var customer models.Customer
 		if err := c.BindJSON(&customer); err != nil {
@@ -92,7 +92,7 @@ func (s *Server) registerCustomerEndpoints(router *gin.Engine) {
 func (s *Server) registerProductEndpoints(router *gin.Engine) {
 	product := router.Group("/product")
 
-	product.GET("", func(c *gin.Context) {
+	product.GET("/", func(c *gin.Context) {
 
 		var products []models.Product
 		if err := s.db.Find(&products).Error; err != nil {
@@ -101,7 +101,7 @@ func (s *Server) registerProductEndpoints(router *gin.Engine) {
 			c.JSON(http.StatusOK, products)
 		}
 	})
-	product.POST("", func(c *gin.Context) {
+	product.POST("/", func(c *gin.Context) {
 
 		var product models.Product
 		if err := c.BindJSON(&product); err != nil {
@@ -154,7 +154,7 @@ func (s *Server) registerProductEndpoints(router *gin.Engine) {
 
 func (s *Server) registerOrdersEndpoints(router *gin.Engine) {
 	order := router.Group("/order")
-	order.GET("", func(c *gin.Context) {
+	order.GET("/", func(c *gin.Context) {
 
 		var orders []models.Order
 		if err := s.db.Preload("Customer").Preload("Products").Find(&orders).Error; err != nil {
@@ -163,7 +163,7 @@ func (s *Server) registerOrdersEndpoints(router *gin.Engine) {
 			c.JSON(http.StatusOK, orders)
 		}
 	})
-	order.POST("", func(c *gin.Context) {
+	order.POST("/", func(c *gin.Context) {
 
 		var order models.Order
 		if err := c.BindJSON(&order); err != nil {

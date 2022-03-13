@@ -21,9 +21,8 @@ resource "kubernetes_ingress" "products_api_gateway" {
     }
 
     annotations = {
-      "kubernetes.io/ingress.class"              = "addon-http-application-routing"
-      "nginx.ingress.kubernetes.io/ssl-redirect" = "false"
-      #"cert-manager.io/cluster-issuer"             = "letsencrypt-staging"
+      "kubernetes.io/ingress.class"                = "addon-http-application-routing"
+      "nginx.ingress.kubernetes.io/ssl-redirect"   = "false"
       "nginx.ingress.kubernetes.io/rewrite-target" = "/$2"
       "nginx.ingress.kubernetes.io/use-regex"      = "true"
     }
@@ -68,7 +67,7 @@ resource "kubernetes_deployment" "products_deployment" {
       spec {
         container {
           name  = local.products_service_name
-          image = "kolan1992/products.service:simple"
+          image = "kolan1992/products.service"
 
           env {
             name  = "environment"

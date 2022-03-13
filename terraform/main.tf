@@ -2,7 +2,12 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "=2.5.0"
+      version = "~>2.5.0"
+    }
+
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = "~>1.13.0"
     }
   }
 }
@@ -32,4 +37,10 @@ module "k8s" {
   client_certificate     = base64decode(module.cluster.client_certificate)
   client_key             = base64decode(module.cluster.client_key)
   cluster_ca_certificate = base64decode(module.cluster.cluster_ca_certificate)
+}
+
+
+module "cockroachdb-bash" {
+  source     = "./modules/cockroachdb-bash/"
+  depends_on = [module.cluster]
 }

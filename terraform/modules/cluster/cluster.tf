@@ -11,11 +11,10 @@ resource "azurerm_kubernetes_cluster" "aks-demo" {
   kubernetes_version  = var.kubernetes_version
 
   default_node_pool {
-    name            = "default"
-    node_count      = 1
-    vm_size         = "Standard_E4s_v3"
-    type            = "VirtualMachineScaleSets"
-    os_disk_size_gb = 50
+    name       = "default"
+    node_count = 3
+    vm_size    = "standard_d2_v2"
+    type       = "VirtualMachineScaleSets"
   }
 
   service_principal {
