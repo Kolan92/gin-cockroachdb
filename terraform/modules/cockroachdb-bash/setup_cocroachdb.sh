@@ -12,7 +12,7 @@ echo 'Finished example.yaml'
 kubectl create -f https://raw.githubusercontent.com/cockroachdb/cockroach-operator/master/examples/client-secure-operator.yaml --kubeconfig kubeconfig
 echo 'Finished client-secure-operator.yaml'
 
-#TODO store passowrds in secure way...
+#TODO store passwords in secure way...
 kubectl exec -it cockroachdb-client-secure \
 --kubeconfig kubeconfig \
 -- ./cockroach sql \
